@@ -26,6 +26,15 @@ public class User {
     private int level;
 
     /**
+     * Constructor
+     *
+     * @param id the id of the user
+     */
+    public User(int id) {
+        this.id = id;
+    }
+
+    /**
      * Add a certain amount of experience to the current amount, and level up if needed
      *
      * @param experienceGained the amount of experience gained
@@ -55,6 +64,23 @@ public class User {
         int factor = 25;
 
         return factor * level * (1 + level);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getExperience() {
+
+        return this.experience;
     }
 }
 
