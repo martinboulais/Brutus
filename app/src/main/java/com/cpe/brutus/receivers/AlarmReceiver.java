@@ -1,4 +1,4 @@
-package com.cpe.brutus.services;
+package com.cpe.brutus.receivers;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
