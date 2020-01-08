@@ -15,7 +15,8 @@ import java.util.List;
 public class ActivityRecognitionReceiver extends BroadcastReceiver {
 
     Context mContext;
-    List<String> activityList = new ArrayList<String>();
+    List<ActivityTransitionEvent> activityList = new ArrayList<ActivityTransitionEvent>();
+    String toSend="";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -23,56 +24,65 @@ public class ActivityRecognitionReceiver extends BroadcastReceiver {
             this.mContext = context;
         }
 
-        System.out.println("receive");
+
         if (ActivityTransitionResult.hasResult(intent)){
             ActivityTransitionResult result= ActivityTransitionResult.extractResult(intent);
             if (result != null){
                 processTransitionResult(result);
             }
-
-
         }
     }
 
 
 
     public void processTransitionResult (ActivityTransitionResult result){
-        System.out.println("process");
         for (ActivityTransitionEvent event : result.getTransitionEvents()){
             onDetectedTransition(event);
         }
 
     }
 
+
     private void onDetectedTransition (ActivityTransitionEvent activity){
-        System.out.println("detected");
+        String ret ="activity= ";
+        saveTransitionToSend(activity);
         switch(activity.getActivityType()){
             case DetectedActivity.ON_BICYCLE:
-                this.activityList.add("velo");
-                System.out.println("velo");
+                this.activityList.add(activity);
+                ret =ret + "velo";
                 break;
             case DetectedActivity.IN_VEHICLE:
-                System.out.println("voiture");
-                this.activityList.add("voiture");
+                ret =ret + "voiture";
                 break;
+
             case DetectedActivity.WALKING:
-                System.out.println("marche");
-                this.activityList.add("marche");
+                ret =ret + "marche";
+                this.activityList.add(activity);
                 break;
+
             case DetectedActivity.RUNNING:
-                System.out.println("course");
-                this.activityList.add("course");
+                ret =ret + "course";
+                this.activityList.add(activity);
                 break;
+
             case DetectedActivity.STILL:
-                System.out.println("rien");
-                this.activityList.add("rien");
+                ret =ret + "rien";
+                this.activityList.add(activity);
                 break;
 
-
+            default:
+                ret = ret +"unknown";
+                break;
         }
+
     }
 
-    private void saveTransition(ActivityTransitionEvent activity){
+    private void saveTransitionToSend(ActivityTransitionEvent activity){
+        System.out.println(activity.getActivityType());
+        ActivityRecognitionUtils utils = new ActivityRecognitionUtils();
+        this.toSend=this.toSend+utils.createTransitionString(activity);
+        System.out.println("toSend");
+        System.out.println(this.toSend);
 
     }
 

@@ -144,7 +144,6 @@ public class Activity_recognition{
                 new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void result) {
-                        System.out.println("sucess");
 
                        // System.out.println(result.toString());
                     }

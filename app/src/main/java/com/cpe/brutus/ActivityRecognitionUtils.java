@@ -3,7 +3,9 @@ package com.cpe.brutus;
 import com.google.android.gms.location.ActivityTransitionEvent;
 import com.google.android.gms.location.DetectedActivity;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class ActivityRecognitionUtils {
@@ -16,16 +18,33 @@ public class ActivityRecognitionUtils {
 
     public String createTransitionString(ActivityTransitionEvent activity){
         String ret="";
+        Date aujourdhui = new Date();
+
+        DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
+                DateFormat.SHORT,
+                DateFormat.SHORT);
         String activityType = activityToString(activity.getActivityType());
-        ret = ("Activité: " + activityType + " à " + SimpleDateFormat.getDateTimeInstance());
+        String activityTransition = transitionToString(activity.getTransitionType());
+        ret = (activityTransition+" Activité: " + activityType + " à " + shortDateFormat.format(aujourdhui));
 
         return ret;
 
     }
+    public String transitionToString(int activity){
+        String ret="";
+        switch(activity){
+            case 0:
+                ret="Start ";
+                break;
+            case 1:
+                ret="End ";
+                break;
+        }
+        return ret;
+    }
 
     public String activityToString(int activity){
         String ret="";
-        System.out.println("detected");
         switch(activity){
             case DetectedActivity.ON_BICYCLE:
                 ret="ON_BICYCLE";
@@ -42,10 +61,9 @@ public class ActivityRecognitionUtils {
             case DetectedActivity.STILL:
                 ret="STILL";
                 break;
-        
-
+            default:
+                break;
         }
-        System.out.println(ret);
         return ret;
     }
 
