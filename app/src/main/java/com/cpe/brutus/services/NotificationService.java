@@ -41,25 +41,38 @@ public class NotificationService extends Service {
                 Thread.currentThread().interrupt();
             }
 
-            Toast.makeText(mContext, "Notification done !", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, "Notification done !", Toast.LENGTH_SHORT).show();
 
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
             Intent notificationIntent = new Intent(mContext, AlarmReceiver.class);
 
-            notificationIntent.putExtra("titleText", "Va courir gros lard !");
-            notificationIntent.putExtra("contentText", "Ouvre ton nouveau challenge.");
+            Bundle data = msg.getData();
+            String ts = data.getString("notifTime");
+            String[] tsSeparated = ts.split(" ");
+            String[] dateSeparated = tsSeparated[0].split("-");
+            String[] timeSeparated = tsSeparated[1].split(":");
+            int year = Integer.parseInt(dateSeparated[0]);
+            int month = Integer.parseInt(dateSeparated[1]) - 1;
+            int day = Integer.parseInt(dateSeparated[2]);
+
+            int hour = Integer.parseInt(timeSeparated[0]);
+            int minute = Integer.parseInt(timeSeparated[1]);
+            int second = Integer.parseInt(timeSeparated[2]);
+
+            notificationIntent.putExtra("titleText", data.getString("titleText"));
+            notificationIntent.putExtra("contentText", data.getString("contentText"));
 
             PendingIntent broadcast = PendingIntent.getBroadcast(mContext, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.DAY_OF_MONTH, 8);
-            cal.set(Calendar.MONTH, 0);
-            cal.set(Calendar.YEAR, 2020);
+            cal.set(Calendar.DAY_OF_MONTH, day);
+            cal.set(Calendar.MONTH, month);
+            cal.set(Calendar.YEAR, year);
 
-            cal.set(Calendar.HOUR_OF_DAY, 11);
-            cal.set(Calendar.MINUTE, 43);
-            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.HOUR_OF_DAY, hour);
+            cal.set(Calendar.MINUTE, minute);
+            cal.set(Calendar.SECOND, second);
 
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
 
@@ -71,6 +84,7 @@ public class NotificationService extends Service {
 
     @Override
     public void onCreate() {
+        //Toast.makeText(this, "Notification service created", Toast.LENGTH_SHORT).show();
         // Start up the thread running the service. Note that we create a
         // separate thread because the service normally runs in the process's
         // main thread, which we don't want to block. We also make it
@@ -86,11 +100,12 @@ public class NotificationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, "Notification service starting", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Notification service starting", Toast.LENGTH_SHORT).show();
 
         Bundle data = new Bundle();
         data.putString("titleText", intent.getStringExtra("titleText"));
         data.putString("contentText", intent.getStringExtra("contentText"));
+        data.putString("notifTime", intent.getStringExtra("notifTime"));
 
         // For each start request, send a message to start a job and deliver the
         // start ID so we know which request we're stopping when we finish the job
@@ -111,6 +126,6 @@ public class NotificationService extends Service {
 
     @Override
     public void onDestroy() {
-        Toast.makeText(this, "Notification service done", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Notification service done", Toast.LENGTH_SHORT).show();
     }
 }
