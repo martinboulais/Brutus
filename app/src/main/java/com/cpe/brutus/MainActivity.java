@@ -10,9 +10,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initRecognition();
 
+
+    }
+
+    public void initRecognition(){
         Activity_recognition act= new Activity_recognition();
 
-        act.getTransitionsActivity();
+        act.startTracking(this);
+
     }
+
+
 }

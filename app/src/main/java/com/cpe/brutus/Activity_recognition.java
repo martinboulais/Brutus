@@ -4,6 +4,8 @@ package com.cpe.brutus;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+
 import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.ActivityRecognitionClient;
 import com.google.android.gms.location.ActivityTransition;
@@ -26,11 +28,42 @@ public class Activity_recognition{
 
     public void startTracking(Context context){
         this.mContext= context;
+
         launchTransitionsActivity();
 
     }
-    public void launchTransitionsActivity(){
 
+    public void stopTracking(){
+        if(mContext != null && mPendingIntent != null){
+            // myPendingIntent is the instance of PendingIntent where the app receives callbacks.
+            Task<Void> task = ActivityRecognition.getClient(mContext)
+                    .removeActivityTransitionUpdates(mPendingIntent);
+
+            task.addOnSuccessListener(
+                    new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void result) {
+                            mPendingIntent.cancel();
+                        }
+                    }
+            );
+
+            task.addOnFailureListener(
+                    new OnFailureListener() {
+                        @Override
+                        public void onFailure(Exception e) {
+                            Log.e("MYCOMPONENT", e.getMessage());
+                        }
+                    }
+            );
+
+
+        }
+    }
+
+
+    public void launchTransitionsActivity(){
+        System.out.println("lauch");
         /*
         * create a list of ActivityTransition object
         * */
@@ -73,7 +106,9 @@ public class Activity_recognition{
         Intent intent = new Intent(mContext, MainActivity.class);
 
         mPendingIntent = PendingIntent.getBroadcast(mContext,0,intent,0);
+        System.out.println("mPendingIntent");
 
+        System.out.println(mPendingIntent.describeContents());
         Task<Void> task = ActivityRecognition.getClient(mContext)
                 .requestActivityTransitionUpdates(request, mPendingIntent);
 
@@ -81,7 +116,8 @@ public class Activity_recognition{
                 new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void result) {
-                        // Handle success
+                        System.out.println("sucess");
+                       // System.out.println(result.toString());
                     }
                 }
         );
