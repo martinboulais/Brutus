@@ -47,7 +47,7 @@ public class Activity_recognition{
                         }
                     }
             );
-
+            
             task.addOnFailureListener(
                     new OnFailureListener() {
                         @Override
@@ -56,7 +56,6 @@ public class Activity_recognition{
                         }
                     }
             );
-
 
         }
     }

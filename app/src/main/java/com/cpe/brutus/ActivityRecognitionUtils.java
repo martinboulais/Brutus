@@ -39,6 +39,8 @@ public class ActivityRecognitionUtils {
             case 1:
                 ret="End ";
                 break;
+            default:
+                ret="unknown";
         }
         return ret;
     }
