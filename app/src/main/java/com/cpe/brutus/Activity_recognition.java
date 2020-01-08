@@ -75,8 +75,20 @@ public class Activity_recognition{
         );
         this.transitions.add(
                 new ActivityTransition.Builder()
+                        .setActivityType(DetectedActivity.IN_VEHICLE)
+                        .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
+                        .build()
+        );
+        this.transitions.add(
+                new ActivityTransition.Builder()
                         .setActivityType(DetectedActivity.RUNNING)
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
+                        .build()
+        );
+        this.transitions.add(
+                new ActivityTransition.Builder()
+                        .setActivityType(DetectedActivity.RUNNING)
+                        .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
                         .build()
         );
         this.transitions.add(
@@ -87,36 +99,53 @@ public class Activity_recognition{
         );
         this.transitions.add(
                 new ActivityTransition.Builder()
+                        .setActivityType(DetectedActivity.WALKING)
+                        .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
+                        .build()
+        );
+        this.transitions.add(
+                new ActivityTransition.Builder()
                         .setActivityType(DetectedActivity.ON_BICYCLE)
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
                         .build()
         );
-
+        this.transitions.add(
+                new ActivityTransition.Builder()
+                        .setActivityType(DetectedActivity.ON_BICYCLE)
+                        .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
+                        .build()
+        );
         this.transitions.add(
                 new ActivityTransition.Builder()
                         .setActivityType(DetectedActivity.STILL)
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
                         .build()
         );
-
+        this.transitions.add(
+                new ActivityTransition.Builder()
+                        .setActivityType(DetectedActivity.STILL)
+                        .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
+                        .build()
+        );
         ActivityTransitionRequest request = new ActivityTransitionRequest(transitions);
 
         ActivityRecognitionClient activityRecognitionClient= ActivityRecognition.getClient(mContext);
 
-        Intent intent = new Intent(mContext, MainActivity.class);
+        Intent intent = new Intent(mContext, ActivityRecognitionReceiver.class);
 
         mPendingIntent = PendingIntent.getBroadcast(mContext,0,intent,0);
-        System.out.println("mPendingIntent");
 
-        System.out.println(mPendingIntent.describeContents());
-        Task<Void> task = ActivityRecognition.getClient(mContext)
+
+        Task<Void> task = activityRecognitionClient
                 .requestActivityTransitionUpdates(request, mPendingIntent);
 
         task.addOnSuccessListener(
+
                 new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void result) {
                         System.out.println("sucess");
+
                        // System.out.println(result.toString());
                     }
                 }

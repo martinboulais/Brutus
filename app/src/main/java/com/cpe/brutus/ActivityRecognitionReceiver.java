@@ -15,7 +15,7 @@ import java.util.List;
 public class ActivityRecognitionReceiver extends BroadcastReceiver {
 
     Context mContext;
-    List<String> activitylist = new ArrayList<String>();
+    List<String> activityList = new ArrayList<String>();
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -26,7 +26,10 @@ public class ActivityRecognitionReceiver extends BroadcastReceiver {
         System.out.println("receive");
         if (ActivityTransitionResult.hasResult(intent)){
             ActivityTransitionResult result= ActivityTransitionResult.extractResult(intent);
-            processTransitionResult(result);
+            if (result != null){
+                processTransitionResult(result);
+            }
+
 
         }
     }
@@ -45,24 +48,24 @@ public class ActivityRecognitionReceiver extends BroadcastReceiver {
         System.out.println("detected");
         switch(activity.getActivityType()){
             case DetectedActivity.ON_BICYCLE:
-                this.activitylist.add("velo");
+                this.activityList.add("velo");
                 System.out.println("velo");
                 break;
             case DetectedActivity.IN_VEHICLE:
                 System.out.println("voiture");
-                this.activitylist.add("voiture");
+                this.activityList.add("voiture");
                 break;
             case DetectedActivity.WALKING:
                 System.out.println("marche");
-                this.activitylist.add("marche");
+                this.activityList.add("marche");
                 break;
             case DetectedActivity.RUNNING:
                 System.out.println("course");
-                this.activitylist.add("course");
+                this.activityList.add("course");
                 break;
             case DetectedActivity.STILL:
                 System.out.println("rien");
-                this.activitylist.add("rien");
+                this.activityList.add("rien");
                 break;
 
 
