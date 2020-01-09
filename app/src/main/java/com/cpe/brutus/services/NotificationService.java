@@ -78,7 +78,7 @@ public class NotificationService extends Service {
 
             // Stop the service using the startId, so that we don't stop
             // the service in the middle of handling another job
-            stopSelf(msg.arg1);
+            // stopSelf(msg.arg1);
         }
     }
 

@@ -13,7 +13,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        DEMO - Send a notification at a precise time
+        // DEMO - Send a notification at a precise time
 //        Intent intent = new Intent(this, NotificationService.class);
 //        intent.putExtra("titleText", "Va courir gros lard !");
 //        intent.putExtra("contentText", "Ouvre ton nouveau challenge.");
