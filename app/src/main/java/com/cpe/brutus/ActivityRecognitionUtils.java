@@ -34,12 +34,14 @@ public class ActivityRecognitionUtils {
 
 
 
-
+        DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
+                DateFormat.SHORT,
+                DateFormat.MEDIUM);
         //check if we have change the current activity
         if (newActivity(activity)){
             String activityType = activityToString(activity.getActivityType());
             String activityTransition = transitionToString(activity.getTransitionType());
-
+            //New Activity
             ret = (activityTransition+" Activité: " + activityType + " à " + shortDateFormat.format(today));
             System.out.println(ret);
         }
@@ -89,7 +91,7 @@ public class ActivityRecognitionUtils {
         return ret;
     }
 
-    public boolean newActivity (ActivityTransitionEvent activity) throws ParseException {
+    public boolean newActivity (ActivityTransitionEvent activity){
         boolean ret = false;
         DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
                 DateFormat.SHORT,
@@ -103,16 +105,29 @@ public class ActivityRecognitionUtils {
         if (( this.currentActivity == null)|| activity.getActivityType() != this.currentActivity.getActivityType() ){
             Date today = new Date();
 
-            SimpleDateFormat SDF = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-            //Duration of the activity
-            this.activityTime = (SDF.parse((shortDateFormat.format(today)).toString()).getTime()) -
-                                (SDF.parse((shortDateFormat.format(this.startCurrentActivity)).toString()).getTime());
+            try{
+                SimpleDateFormat SDF = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                //Duration of the activity
+                long duration = (SDF.parse(shortDateFormat.format(today)).getTime()) -
+                        (SDF.parse(shortDateFormat.format(this.startCurrentActivity)).getTime());
+                this.activityTime = duration/1000;
+            }
+            catch (Exception E){
+
+            }
+            System.out.println("FIN Activité: "+ this.currentActivity.getActivityType()+" Durée: "+this.activityTime);
+            sendToLog(this.currentActivity.getActivityType(), shortDateFormat.format(this.startCurrentActivity), this.activityTime);
             this.currentActivity=activity;
             this.startCurrentActivity = today;
             ret=true;
 
         }
         return ret;
+    }
+
+    public void sendToLog (int activityType, String date, long duration){
+        String toSend= "activity:"+activityType+" start:"+date+" duration:"+duration;
+
     }
 
 
