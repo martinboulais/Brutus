@@ -20,11 +20,9 @@ public class ActivityRecognitionReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        System.out.println("receive");
         if(context !=null) {
             this.mContext = context;
         }
-
 
         if (ActivityTransitionResult.hasResult(intent)){
             ActivityTransitionResult result= ActivityTransitionResult.extractResult(intent);
@@ -46,7 +44,6 @@ public class ActivityRecognitionReceiver extends BroadcastReceiver {
 
     private void onDetectedTransition (ActivityTransitionEvent activity){
         String ret ="activity= ";
-        System.out.println(activity.getActivityType());
         saveTransitionToSend(activity);
         switch(activity.getActivityType()){
             case DetectedActivity.ON_BICYCLE:
@@ -80,11 +77,8 @@ public class ActivityRecognitionReceiver extends BroadcastReceiver {
     }
 
     private void saveTransitionToSend(ActivityTransitionEvent activity){
-        //System.out.println(activity.getActivityType());
         ActivityRecognitionUtils utils = new ActivityRecognitionUtils();
-        System.out.println("toSend");
         this.toSend=this.toSend+utils.createTransitionString(activity);
-
         System.out.println(this.toSend);
 
     }

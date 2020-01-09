@@ -23,9 +23,15 @@ public class ActivityRecognitionUtils {
         DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
                 DateFormat.SHORT,
                 DateFormat.SHORT);
+
+        DateFormat mediumDateFormat = DateFormat.getDateTimeInstance(
+                DateFormat.MEDIUM,
+                DateFormat.MEDIUM);
+        
         String activityType = activityToString(activity.getActivityType());
         String activityTransition = transitionToString(activity.getTransitionType());
         ret = (activityTransition+" Activité: " + activityType + " à " + shortDateFormat.format(aujourdhui));
+
 
         return ret;
 
