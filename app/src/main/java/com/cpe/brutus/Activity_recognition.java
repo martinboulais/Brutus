@@ -62,7 +62,7 @@ public class Activity_recognition{
 
 
     public void launchTransitionsActivity(){
-        System.out.println("lauch");
+        //System.out.println("lauch");
         /*
         * create a list of ActivityTransition object
         * */
@@ -72,60 +72,60 @@ public class Activity_recognition{
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
                         .build()
         );
-        this.transitions.add(
+        /*this.transitions.add(
                 new ActivityTransition.Builder()
                         .setActivityType(DetectedActivity.IN_VEHICLE)
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
                         .build()
-        );
+        );*/
         this.transitions.add(
                 new ActivityTransition.Builder()
                         .setActivityType(DetectedActivity.RUNNING)
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
                         .build()
         );
-        this.transitions.add(
+        /*this.transitions.add(
                 new ActivityTransition.Builder()
                         .setActivityType(DetectedActivity.RUNNING)
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
                         .build()
-        );
+        );*/
         this.transitions.add(
                 new ActivityTransition.Builder()
                         .setActivityType(DetectedActivity.WALKING)
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
                         .build()
         );
-        this.transitions.add(
+        /*this.transitions.add(
                 new ActivityTransition.Builder()
                         .setActivityType(DetectedActivity.WALKING)
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
                         .build()
-        );
+        );*/
         this.transitions.add(
                 new ActivityTransition.Builder()
                         .setActivityType(DetectedActivity.ON_BICYCLE)
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
                         .build()
         );
-        this.transitions.add(
+       /* this.transitions.add(
                 new ActivityTransition.Builder()
                         .setActivityType(DetectedActivity.ON_BICYCLE)
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
                         .build()
-        );
+        );*/
         this.transitions.add(
                 new ActivityTransition.Builder()
                         .setActivityType(DetectedActivity.STILL)
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_ENTER)
                         .build()
         );
-        this.transitions.add(
+       /* this.transitions.add(
                 new ActivityTransition.Builder()
                         .setActivityType(DetectedActivity.STILL)
                         .setActivityTransition(ActivityTransition.ACTIVITY_TRANSITION_EXIT)
                         .build()
-        );
+        );*/
         ActivityTransitionRequest request = new ActivityTransitionRequest(transitions);
 
         ActivityRecognitionClient activityRecognitionClient= ActivityRecognition.getClient(mContext);

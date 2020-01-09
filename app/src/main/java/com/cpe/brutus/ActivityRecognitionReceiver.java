@@ -16,10 +16,11 @@ public class ActivityRecognitionReceiver extends BroadcastReceiver {
 
     Context mContext;
     List<ActivityTransitionEvent> activityList = new ArrayList<ActivityTransitionEvent>();
-    String toSend="";
+    int toSend=0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        //this.toSend=this.toSend+1;
         if(context !=null) {
             this.mContext = context;
         }
@@ -77,9 +78,11 @@ public class ActivityRecognitionReceiver extends BroadcastReceiver {
     }
 
     private void saveTransitionToSend(ActivityTransitionEvent activity){
-        ActivityRecognitionUtils utils = new ActivityRecognitionUtils();
-        this.toSend=this.toSend+utils.createTransitionString(activity);
-        System.out.println(this.toSend);
+        String test="";
+        ActivityRecognitionUtils utils = ActivityRecognitionUtils.getInstance();
+        test=utils.createTransitionString(activity);
+        //this.toSend= utils.createTransitionString(activity);
+       // System.out.println(test);
 
     }
 
