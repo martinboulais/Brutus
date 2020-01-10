@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Brutus</string>
+    <string name="tracking_notif_text">Suivi de l\'activité en cours...</string>
+    <string name="tracking_channel_name">Suivi de l\'activité</string>
 </resources>

@@ -3,6 +3,7 @@
     package="com.cpe.brutus">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -24,10 +25,10 @@
             android:enabled="true"/>
 
         <service
-            android:name=".services.TestService"
+            android:name=".services.TrackingService"
             android:enabled="true"/>
 
-        <receiver android:name=".receivers.AlarmReceiver"/>
+        <receiver android:name=".receivers.NotificationAlarmReceiver"/>
 
         <receiver android:name=".receivers.OnBootReceiver">
             <intent-filter>

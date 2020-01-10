@@ -15,7 +15,7 @@ import com.cpe.brutus.R;
 
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 
-public class AlarmReceiver extends BroadcastReceiver{
+public class NotificationAlarmReceiver extends BroadcastReceiver{
     private static final String CHANNEL_ID = "com.cpe.brutus";
 
     @Override
@@ -28,9 +28,9 @@ public class AlarmReceiver extends BroadcastReceiver{
 
         PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Notification.Builder builder = new Notification.Builder(context).setAutoCancel(true);
+        android.app.Notification.Builder builder = new android.app.Notification.Builder(context).setAutoCancel(true);
 
-        Notification notification = builder.setContentTitle(intent.getStringExtra("titleText"))
+        android.app.Notification notification = builder.setContentTitle(intent.getStringExtra("titleText"))
                 .setContentText(intent.getStringExtra("contentText"))
                 .setTicker("Nouvelle alerte !")
                 .setSmallIcon(R.mipmap.ic_launcher)

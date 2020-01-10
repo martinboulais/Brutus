@@ -1,6 +1,6 @@
 package com.cpe.brutus.services;
 
-import com.cpe.brutus.receivers.AlarmReceiver;
+import com.cpe.brutus.receivers.NotificationAlarmReceiver;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -14,7 +14,6 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -45,7 +44,7 @@ public class NotificationService extends Service {
 
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-            Intent notificationIntent = new Intent(mContext, AlarmReceiver.class);
+            Intent notificationIntent = new Intent(mContext, NotificationAlarmReceiver.class);
 
             Bundle data = msg.getData();
             String ts = data.getString("notifTime");
