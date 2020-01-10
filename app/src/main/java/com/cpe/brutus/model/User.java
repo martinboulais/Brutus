@@ -1,37 +1,38 @@
 package com.cpe.brutus.model;
 
+import java.io.Serializable;
+
 /**
  * This class keep a track of each data for the user, such as its level, experience...
  */
-public class User {
+public class User implements Serializable {
 
     /**
      * The id is the unique identifier of the user for the backend and the app
      */
-    private int id;
+    private int mId;
 
     /**
      * The name of the user (displayed on the app)
      */
-    private String name;
+    private String mName;
 
     /**
-     * The current experience amount of the user
+     * The RPG level composant manager, to carry level and experience
      */
-    private int experience;
-
-    /**
-     * The current level of the user
-     */
-    private int level;
+    private LevelManager levelManager;
 
     /**
      * Constructor
      *
-     * @param id the id of the user
+     * @param id the mId of the user
+     * @param experience the experience of the user
+     * @param level the level of the user
      */
-    public User(int id) {
-        this.id = id;
+    public User(int id, int experience, int level) {
+
+        levelManager = new LevelManager(experience, level);
+        this.mId = id;
     }
 
     /**
@@ -41,46 +42,31 @@ public class User {
      */
     public void gainExperience(int experienceGained) {
 
-        int levelTotalExperience = this.levelTotalExperience(this.level);
-        this.experience += experienceGained;
-
-        if(this.experience >= levelTotalExperience) {
-
-            this.experience -= levelTotalExperience;
-            this.level ++;
-        }
+        levelManager.gainExperience(experienceGained);
     }
 
-    /**
-     * Returns the amount of experience necessary to complete a level (defined by an integer)
-     * based on https://stackoverflow.com/questions/6954874/php-game-formula-to-calculate-a-level-based-on-exp
-     *
-     * @param level the level for which we want to know the total experience
-     *
-     * @return int the experience amount
-     */
-    private int levelTotalExperience(int level) {
-
-        int factor = 25;
-
-        return factor * level * (1 + level);
-    }
+    // Getters and Setters
 
     public int getId() {
-        return id;
+        return mId;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.mName = name;
     }
 
     public int getExperience() {
 
-        return this.experience;
+        return levelManager.getExperience();
+    }
+
+    public int getLevel() {
+
+        return levelManager.getLevel();
     }
 }
 

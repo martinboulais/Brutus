@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="challengeViewModel"
+            type="com.cpe.brutus.viewmodel.ChallengeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/challenge_card_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        tools:context=".fragment.ChallengeCardFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/frameLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="32dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:padding="32dp"
+            tools:layout_editor_absoluteX="40dp">
+
+            <TextView
+                android:id="@+id/challenge_card_title"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="@{challengeViewModel.title}"
+                app:layout_constraintBottom_toTopOf="@+id/challenge_card_duration"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/challenge_card_duration"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="@{challengeViewModel.duration}"
+                app:layout_constraintBottom_toTopOf="@id/challenge_card_distance"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/challenge_card_title" />
+
+            <TextView
+                android:id="@+id/challenge_card_distance"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="@{challengeViewModel.distance}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/challenge_card_duration" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

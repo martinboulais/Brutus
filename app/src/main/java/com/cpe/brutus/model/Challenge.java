@@ -1,78 +1,78 @@
 package com.cpe.brutus.model;
 
-import javax.xml.datatype.Duration;
+import java.io.Serializable;
 
 /**
- * This class represents a challenge : its duration, its difficulty etc
+ * This class represents a challenge : its mDuration, its mDifficulty etc
  */
-public class Challenge {
+public class Challenge implements Serializable {
 
     /**
-     * The duration of the challenge
+     * The mDuration of the challenge
      */
-    private Duration duration;
+    private SecondsDuration mDuration;
 
     /**
-     * The distance that should be run for the challenge
+     * The mDistance that should be run for the challenge
      */
-    private int distance;
+    private int mDistance;
 
     /**
-     * The difficulty of the challenge (defines the experience earned!)
+     * The mDifficulty of the challenge (defines the experience earned!)
      */
-    private Difficulty difficulty;
+    private Difficulty mDifficulty;
 
     /**
      * The type of the effort, like sprint, long run...
      */
-    private EffortType effortType;
+    private EffortType mEffortType;
 
     /**
      * Constructor
      *
-     * @param duration the duration of the challenge
-     * @param distance the distance of the challenge
-     * @param difficulty the difficulty of the challenge
+     * @param duration the mDuration of the challenge
+     * @param distance the mDistance of the challenge
+     * @param difficulty the mDifficulty of the challenge
      * @param effortType the type of the effort
      */
-    public Challenge(Duration duration, int distance, Difficulty difficulty, EffortType effortType) {
-        this.duration = duration;
-        this.distance = distance;
-        this.difficulty = difficulty;
-        this.effortType = effortType;
+    public Challenge(SecondsDuration duration, int distance, Difficulty difficulty, EffortType effortType) {
+        this.mDuration = duration;
+        this.mDistance = distance;
+        this.mDifficulty = difficulty;
+        this.mEffortType = effortType;
     }
 
 // Getters and Setters
 
-    public Duration getDuration() {
-        return duration;
+    public SecondsDuration getmDuration() {
+        return mDuration;
     }
 
-    public void setDuration(Duration duration) {
-        this.duration = duration;
+    public void setmDuration(SecondsDuration mDuration) {
+        this.mDuration = mDuration;
     }
 
-    public int getDistance() {
-        return distance;
+    public int getmDistance() {
+        return mDistance;
     }
 
-    public void setDistance(int distance) {
-        this.distance = distance;
+    public void setmDistance(int mDistance) {
+        this.mDistance = mDistance;
     }
 
-    public Difficulty getDifficulty() {
-        return difficulty;
+    public Difficulty getmDifficulty() {
+        return mDifficulty;
     }
 
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
+    public void setmDifficulty(Difficulty mDifficulty) {
+        this.mDifficulty = mDifficulty;
     }
 
-    public EffortType getEffortType() {
-        return effortType;
+    public EffortType getmEffortType() {
+        return mEffortType;
     }
 
-    public void setEffortType(EffortType effortType) {
-        this.effortType = effortType;
+    public void setmEffortType(EffortType mEffortType) {
+        this.mEffortType = mEffortType;
     }
 }

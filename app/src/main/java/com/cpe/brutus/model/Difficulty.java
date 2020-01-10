@@ -1,9 +1,11 @@
 package com.cpe.brutus.model;
 
+import java.io.Serializable;
+
 /**
  * The difficulty represents the difficulty of a challenge and tells the experience it gives
  */
-public class Difficulty {
+public class Difficulty implements Serializable {
 
     /**
      * The label of the difficulty, such as "high", "medium", "easy"
@@ -31,5 +33,9 @@ public class Difficulty {
 
     public int getExperienceGain() {
         return experienceGain;
+    }
+
+    public String getLabel() {
+        return label;
     }
 }

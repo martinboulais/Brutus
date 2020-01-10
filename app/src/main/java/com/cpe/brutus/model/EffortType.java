@@ -1,11 +1,12 @@
 package com.cpe.brutus.model;
 
+import java.io.Serializable;
 import java.util.SortedMap;
 
 /**
  * Effort type defines the kind of effort a challenge is, and the diverse steps.
  */
-public class EffortType {
+public class EffortType implements Serializable {
 
     /**
      * This attribute represent the intensity of the effort as a map defining the effort and the

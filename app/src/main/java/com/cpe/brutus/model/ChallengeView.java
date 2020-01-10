@@ -1,7 +1,5 @@
 package com.cpe.brutus.model;
 
-import javax.xml.datatype.Duration;
-
 /**
  * This class represents a view of a challenge, it's a kind of "read only" representation of a
  * challenge
@@ -22,7 +20,7 @@ public class ChallengeView {
      * @param effortType the type of the effort of the wrapped challenge
      */
     public ChallengeView(
-            Duration duration,
+            SecondsDuration duration,
             int distance,
             Difficulty difficulty,
             EffortType effortType
@@ -46,24 +44,24 @@ public class ChallengeView {
      */
     public int getExperienceGain() {
 
-        return this.challenge.getDifficulty().getExperienceGain();
+        return this.challenge.getmDifficulty().getExperienceGain();
     }
 
 // Getters and Setters
 
-    public Duration getDuration() {
-        return challenge.getDuration();
+    public SecondsDuration getDuration() {
+        return challenge.getmDuration();
     }
 
     public int getDistance() {
-        return challenge.getDistance();
+        return challenge.getmDistance();
     }
 
     public Difficulty getDifficulty() {
-        return challenge.getDifficulty();
+        return challenge.getmDifficulty();
     }
 
     public EffortType getEffortType() {
-        return challenge.getEffortType();
+        return challenge.getmEffortType();
     }
 }

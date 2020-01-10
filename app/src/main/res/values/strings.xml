@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Brutus</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="arrow"><![CDATA[>]]></string>
+    <string name="level_display">Niveau %1$d</string>
+    <string name="app_slogan">Challenge yourself!</string>
 </resources>
